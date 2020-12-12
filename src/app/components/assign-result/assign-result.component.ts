@@ -1,8 +1,6 @@
 import { ModalController } from '@ionic/angular';
 import { Component, Input, OnInit } from '@angular/core';
-import { threadId } from 'worker_threads';
-import { FormGroup, NgForm } from '@angular/forms';
-import { zip } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 import { LeaderboardService } from 'src/app/services/leaderboard.service';
 
 @Component({
@@ -69,7 +67,7 @@ export class AssignResultComponent implements OnInit {
       } else {
         st.losses = +st.losses - 1;
       }
-      st.score = +st.wins - +st.losses + +st.ties;
+      st.score = +st.wins + +st.losses + +st.ties;
     });
 
     this.updateTeamScore();
@@ -78,7 +76,7 @@ export class AssignResultComponent implements OnInit {
   tie(x) {
     this.selectedTeams.forEach(st => {
       st.ties = +st.ties + 1;
-      st.score = +st.wins - +st.losses + +st.ties;
+      st.score = +st.wins + +st.losses + +st.ties;
     });
     this.updateTeamScore();
   }
