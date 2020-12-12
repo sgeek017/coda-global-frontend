@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { AlertController, IonSearchbar } from '@ionic/angular';
+import { AlertController, IonSearchbar, ModalController } from '@ionic/angular';
 import { LeaderboardService } from 'src/app/services/leaderboard.service';
+import { AssignResultComponent } from '../assign-result/assign-result.component';
 
 @Component({
   selector: 'app-leaderboard',
@@ -11,7 +12,7 @@ import { LeaderboardService } from 'src/app/services/leaderboard.service';
   styleUrls: ['./leaderboard.component.scss'],
 })
 export class LeaderboardComponent implements OnInit {
-  leaderBoard;
+  leaderBoardList = [];
 
   dataLength = 0;
   displayedColumns: string[] = ['team_name', 'wins', 'losses', 'ties', 'score'];
@@ -23,7 +24,9 @@ export class LeaderboardComponent implements OnInit {
 
   constructor(
     private _leaderboardService: LeaderboardService,
-    private _alertController: AlertController) { }
+    private _alertController: AlertController,
+    private _modalController: ModalController
+  ) { }
 
   ngOnInit() {
     this.loadLeaderBoard();
@@ -32,10 +35,12 @@ export class LeaderboardComponent implements OnInit {
 
   loadLeaderBoard() {
     this._leaderboardService.getAllLeaderboard().subscribe(result => {
+      this.leaderBoardList = result;
       this.dataSource = new MatTableDataSource(result);
       this.dataLength = result.length;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.dataSource.sort.direction = 'desc';
       this.searchbar.value = '';
     }, error => {
       console.log('error while loading');
@@ -89,5 +94,20 @@ export class LeaderboardComponent implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async onAssignResult() {
+    this._modalController.create({
+      componentProps: { leaderBoardList: this.leaderBoardList },
+      component: AssignResultComponent,
+      backdropDismiss: false,
+    }).then(modalEl => {
+      modalEl.present();
+      return modalEl.onDidDismiss();
+    }).then(result => {
+      if (result.role === 'DONE') {
+        this.loadLeaderBoard();
+      }
+    });
   }
 }

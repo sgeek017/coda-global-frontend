@@ -3,6 +3,7 @@
     <ion-row>
       <ion-col>
         <ion-button (click)="onAdd()">Add Team</ion-button>
+        <ion-button (click)="onAssignResult()">Assign Result</ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -11,7 +12,7 @@
           <ion-searchbar #mySearchBar (ionChange)="applyFilter($event)"></ion-searchbar>
         </div>
         <!-- <div class="mat-elevation-z8"> -->
-        <table mat-table [dataSource]="dataSource" matSort matSortDirection="asc" matSortDisableClear
+        <table mat-table [dataSource]="dataSource" matSort matSortDirection="desc" matSortDisableClear
           matSortActive="score" multiTemplateDataRows class="mat-elevation-z8">
 
           <!-- team_name Column -->
@@ -56,7 +57,7 @@
           </tr>
         </table>
 
-        <mat-paginator [length]="[dataLength]" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        <mat-paginator [length]="[dataLength]" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
         <!-- </div> -->
       </ion-col>
     </ion-row>

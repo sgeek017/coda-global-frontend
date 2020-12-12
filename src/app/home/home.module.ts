@@ -8,6 +8,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { HomePageRoutingModule } from './home-routing.module';
 import { LeaderboardComponent } from 'src/app/components/leaderboard/leaderboard.component';
+import { AssignResultComponent } from '../components/assign-result/assign-result.component';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { LeaderboardComponent } from 'src/app/components/leaderboard/leaderboard
     MatPaginatorModule,
     MatSortModule
   ],
-  declarations: [HomePage, LeaderboardComponent],
+  declarations: [HomePage, LeaderboardComponent, AssignResultComponent],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

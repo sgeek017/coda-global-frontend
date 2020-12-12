@@ -27,4 +27,8 @@ export class LeaderboardService {
   addTeamname(team_name) {
     return this._http.post(this.URL, { team_name });
   }
+
+  updateTeamScore(updateScores) {
+    return this._http.put(this.URL, updateScores);
+  }
 }
