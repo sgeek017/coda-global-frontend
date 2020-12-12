@@ -1,10 +1,13 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { HomePageRoutingModule } from './home-routing.module';
+import { LeaderboardComponent } from 'src/app/components/leaderboard/leaderboard.component';
 
 
 @NgModule({
@@ -12,8 +15,13 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, LeaderboardComponent],
+  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class HomePageModule {}
+export class HomePageModule { }

@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  restAPI: "https://coda-global-backend.herokuapp.com/api/"
 };

@@ -1,0 +1,65 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="onAdd()">Add Team</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div>
+          <ion-searchbar #mySearchBar (ionChange)="applyFilter($event)"></ion-searchbar>
+        </div>
+        <!-- <div class="mat-elevation-z8"> -->
+        <table mat-table [dataSource]="dataSource" matSort matSortDirection="asc" matSortDisableClear
+          matSortActive="score" multiTemplateDataRows class="mat-elevation-z8">
+
+          <!-- team_name Column -->
+          <ng-container matColumnDef="team_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <ion-label color="primary"> Team name </ion-label>
+            </th>
+            <td mat-cell *matCellDef="let row"> {{row.team_name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="wins">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <ion-label color="primary"> wins </ion-label>
+            </th>
+            <td mat-cell *matCellDef="let row"> {{row.wins}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="losses">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <ion-label color="primary"> losses</ion-label>
+            </th>
+            <td mat-cell *matCellDef="let row"> {{row.losses}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ties">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <ion-label color="primary"> ties </ion-label>
+            </th>
+            <td mat-cell *matCellDef="let row"> {{row.ties}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="score">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <ion-label color="primary"> score </ion-label>
+            </th>
+            <td mat-cell *matCellDef="let row"> {{row.score}} </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+
+        <mat-paginator [length]="[dataLength]" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        <!-- </div> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
